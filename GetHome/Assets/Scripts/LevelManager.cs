@@ -20,6 +20,11 @@ public class LevelManager : MonoBehaviour
         LoadLevel(levels[0]);
     }
 
+    public void SelectLevel(int level)
+    {
+        LoadLevel(levels[level]);
+    }
+
     private void LoadLevel(GameObject level)
     {
         player1StartPos = level.transform.GetChild(1).position;
