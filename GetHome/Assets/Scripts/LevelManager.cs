@@ -88,28 +88,61 @@ public class LevelManager : MonoBehaviour
         switch(direction)
         {
             case 0:
-                if(player1Pos.y - 1 >= 0)
-                    if (levelGrid[player1Pos.x, player1Pos.y - 1] != -1) canPlayer1 = true;
-                if(player2Pos.y + 1 < levelGrid.GetLength(1))
-                    if (levelGrid[player2Pos.x, player2Pos.y + 1] != -1) canPlayer2 = true;
+                if (player2Pos.y - 1 >= 0)
+                    if (levelGrid[player2Pos.x, player2Pos.y - 1] != -1)
+                    {
+                        canPlayer2 = true;
+                        player2Pos.Set(player2Pos.x, player2Pos.y - 1);
+                    }
+                if (player1Pos.y + 1 < levelGrid.GetLength(1))
+                    if (levelGrid[player1Pos.x, player1Pos.y + 1] != -1)
+                    {
+                        canPlayer1 = true;
+                        player1Pos.Set(player1Pos.x, player1Pos.y + 1);
+                    }
                 break;
             case 1:
-                if(player1Pos.x + 1 < levelGrid.GetLength(0))
-                    if (levelGrid[player1Pos.x + 1, player1Pos.y] != -1) canPlayer1 = true;
-                if(player2Pos.x -1 >= 0)
-                    if (levelGrid[player2Pos.x - 1, player2Pos.y] != -1) canPlayer2 = true;
+                if (player1Pos.x + 1 < levelGrid.GetLength(0))
+                    if (levelGrid[player1Pos.x + 1, player1Pos.y] != -1)
+                    {
+                        canPlayer1 = true;
+                        player1Pos.Set(player1Pos.x + 1, player1Pos.y);
+                    }
+                if (player2Pos.x - 1 >= 0)
+                    if (levelGrid[player2Pos.x - 1, player2Pos.y] != -1)
+                    {
+                        canPlayer2 = true;
+                        player2Pos.Set(player2Pos.x - 1, player2Pos.y);
+                    }
                 break;
             case 2:
-                if(player1Pos.y + 1 < levelGrid.GetLength(1))
-                    if (levelGrid[player1Pos.x, player1Pos.y + 1] != -1) canPlayer1 = true;
-                if(player2Pos.y - 1 >= 0)
-                    if (levelGrid[player2Pos.x, player2Pos.y - 1] != -1) canPlayer2 = true;
-                break;
+                if (player2Pos.y + 1 < levelGrid.GetLength(1))
+                    if (levelGrid[player2Pos.x, player2Pos.y + 1] != -1)
+                    {
+                        canPlayer2 = true;
+                        player2Pos.Set(player2Pos.x, player2Pos.y + 1);
+                    }
+                if (player1Pos.y - 1 >= 0)
+                    if (levelGrid[player1Pos.x, player1Pos.y - 1] != -1)
+                    {
+                        canPlayer1 = true;
+                        player1Pos.Set(player1Pos.x, player1Pos.y - 1);
+
+                    }
+                    break;
             case 3:
-                if(player1Pos.x - 1 >= 0)
-                    if (levelGrid[player1Pos.x - 1, player1Pos.y] != -1) canPlayer1 = true;
-                if (player2Pos.x + 1 < levelGrid.GetLength(0)) 
-                    if (levelGrid[player2Pos.x + 1, player2Pos.y] != -1) canPlayer2 = true;
+                if (player1Pos.x - 1 >= 0)
+                    if (levelGrid[player1Pos.x - 1, player1Pos.y] != -1)
+                    {
+                        canPlayer1 = true;
+                        player1Pos.Set(player1Pos.x - 1, player1Pos.y);
+                    }
+                if (player2Pos.x + 1 < levelGrid.GetLength(0))
+                    if (levelGrid[player2Pos.x + 1, player2Pos.y] != -1)
+                    {
+                        canPlayer2 = true;
+                        player2Pos.Set(player2Pos.x + 1, player2Pos.y);
+                    }
                 break;
         }
 
