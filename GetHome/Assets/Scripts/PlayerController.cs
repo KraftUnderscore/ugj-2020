@@ -36,11 +36,13 @@ public class PlayerController : MonoBehaviour
             {
                 Vector2 plr1Pos = player1.position;
                 player1.position = new Vector2(plr1Pos.x, plr1Pos.y + step);
+                player1.localEulerAngles = new Vector3(0, 0, 0);
             }
             if (output[1])
             {
                 Vector2 plr2Pos = player2.position;
                 player2.position = new Vector2(plr2Pos.x, plr2Pos.y - step);
+                player2.localEulerAngles = new Vector3(0, 0, -180f);
             }
         }
         else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
@@ -50,11 +52,13 @@ public class PlayerController : MonoBehaviour
             {
                 Vector2 plr1Pos = player1.position;
                 player1.position = new Vector2(plr1Pos.x + step, plr1Pos.y);
+                player1.localEulerAngles = new Vector3(0, 0, -90f);
             }
             if (output[1])
             {
                 Vector2 plr2Pos = player2.position;
                 player2.position = new Vector2(plr2Pos.x - step, plr2Pos.y);
+                player2.localEulerAngles = new Vector3(0, 0, 90f);
             }
         }
         else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
@@ -64,11 +68,13 @@ public class PlayerController : MonoBehaviour
             {
                 Vector2 plr1Pos = player1.position;
                 player1.position = new Vector2(plr1Pos.x, plr1Pos.y - step);
+                player1.localEulerAngles = new Vector3(0, 0, -180f);
             }
             if (output[1])
             {
                 Vector2 plr2Pos = player2.position;
                 player2.position = new Vector2(plr2Pos.x, plr2Pos.y + step);
+                player2.localEulerAngles = new Vector3(0, 0, 0);
             }
         }
         else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
@@ -78,11 +84,13 @@ public class PlayerController : MonoBehaviour
             {
                 Vector2 plr1Pos = player1.position;
                 player1.position = new Vector2(plr1Pos.x - step, plr1Pos.y);
+                player1.localEulerAngles = new Vector3(0, 0, 90f);
             }
             if (output[1])
             {
                 Vector2 plr2Pos = player2.position;
                 player2.position = new Vector2(plr2Pos.x + step, plr2Pos.y);
+                player2.localEulerAngles = new Vector3(0, 0, -90f);
             }
         }
     }
