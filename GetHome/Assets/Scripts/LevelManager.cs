@@ -65,18 +65,6 @@ public class LevelManager : MonoBehaviour
                 }
             }
         }
-
-        for (int x = 0; x < bounds.size.y; x++)
-        {
-            string debug = "";
-            for (int y = 0; y < bounds.size.x; y++)
-            {
-                if (levelGrid[y, x] == -1) debug += "0";
-                else debug += "X";
-            }
-            Debug.Log(debug);
-        }
-
         level.SetActive(true);
     }
 
@@ -84,81 +72,108 @@ public class LevelManager : MonoBehaviour
     {
         bool canPlayer1 = false;
         bool canPlayer2 = false;
+        if(IsGameOver(direction))
+        {
+            //call game over from game manager
+            Debug.Log("PRZEGRANA!!!");
+            canPlayer1 = true;
+        }
+        else
+        {
+            switch (direction)
+            {
+                case 0:
+                    if (player2Pos.y - 1 >= 0)
+                        if (levelGrid[player2Pos.x, player2Pos.y - 1] != -1)
+                        {
+                            canPlayer2 = true;
+                            player2Pos.Set(player2Pos.x, player2Pos.y - 1);
+                        }
+                    if (player1Pos.y + 1 < levelGrid.GetLength(1))
+                        if (levelGrid[player1Pos.x, player1Pos.y + 1] != -1)
+                        {
+                            canPlayer1 = true;
+                            player1Pos.Set(player1Pos.x, player1Pos.y + 1);
+                        }
+                    break;
+                case 1:
+                    if (player1Pos.x + 1 < levelGrid.GetLength(0))
+                        if (levelGrid[player1Pos.x + 1, player1Pos.y] != -1)
+                        {
+                            canPlayer1 = true;
+                            player1Pos.Set(player1Pos.x + 1, player1Pos.y);
+                        }
+                    if (player2Pos.x - 1 >= 0)
+                        if (levelGrid[player2Pos.x - 1, player2Pos.y] != -1)
+                        {
+                            canPlayer2 = true;
+                            player2Pos.Set(player2Pos.x - 1, player2Pos.y);
+                        }
+                    break;
+                case 2:
+                    if (player2Pos.y + 1 < levelGrid.GetLength(1))
+                        if (levelGrid[player2Pos.x, player2Pos.y + 1] != -1)
+                        {
+                            canPlayer2 = true;
+                            player2Pos.Set(player2Pos.x, player2Pos.y + 1);
+                        }
+                    if (player1Pos.y - 1 >= 0)
+                        if (levelGrid[player1Pos.x, player1Pos.y - 1] != -1)
+                        {
+                            canPlayer1 = true;
+                            player1Pos.Set(player1Pos.x, player1Pos.y - 1);
 
+                        }
+                        break;
+                case 3:
+                    if (player1Pos.x - 1 >= 0)
+                        if (levelGrid[player1Pos.x - 1, player1Pos.y] != -1)
+                        {
+                            canPlayer1 = true;
+                            player1Pos.Set(player1Pos.x - 1, player1Pos.y);
+                        }
+                    if (player2Pos.x + 1 < levelGrid.GetLength(0))
+                        if (levelGrid[player2Pos.x + 1, player2Pos.y] != -1)
+                        {
+                            canPlayer2 = true;
+                            player2Pos.Set(player2Pos.x + 1, player2Pos.y);
+                        }
+                    break;
+            }
+        }
+        if (IsVictory())
+        {
+            //tell game manager
+            Debug.Log("WYGRANA ELO");
+        }
+        bool[] output = { canPlayer1, canPlayer2 };
+        return output;
+    }
+
+    private bool IsVictory()
+    {
+        return levelGrid[player1Pos.x, player1Pos.y] == 2 && levelGrid[player2Pos.x, player2Pos.y] == 4;
+    }
+
+    private bool IsGameOver(int direction)
+    {
+        if (player1Pos.x == player2Pos.x && player1Pos.y == player2Pos.y) return true;
         switch(direction)
         {
             case 0:
-                if (player2Pos.y - 1 >= 0)
-                    if (levelGrid[player2Pos.x, player2Pos.y - 1] != -1)
-                    {
-                        canPlayer2 = true;
-                        player2Pos.Set(player2Pos.x, player2Pos.y - 1);
-                    }
-                if (player1Pos.y + 1 < levelGrid.GetLength(1))
-                    if (levelGrid[player1Pos.x, player1Pos.y + 1] != -1)
-                    {
-                        canPlayer1 = true;
-                        player1Pos.Set(player1Pos.x, player1Pos.y + 1);
-                    }
+                if (player1Pos.y - player2Pos.y == -1 && player1Pos.x == player2Pos.x) return true;
                 break;
             case 1:
-                if (player1Pos.x + 1 < levelGrid.GetLength(0))
-                    if (levelGrid[player1Pos.x + 1, player1Pos.y] != -1)
-                    {
-                        canPlayer1 = true;
-                        player1Pos.Set(player1Pos.x + 1, player1Pos.y);
-                    }
-                if (player2Pos.x - 1 >= 0)
-                    if (levelGrid[player2Pos.x - 1, player2Pos.y] != -1)
-                    {
-                        canPlayer2 = true;
-                        player2Pos.Set(player2Pos.x - 1, player2Pos.y);
-                    }
+                if (player1Pos.x - player2Pos.x == -1 && player1Pos.y == player2Pos.y) return true;
                 break;
             case 2:
-                if (player2Pos.y + 1 < levelGrid.GetLength(1))
-                    if (levelGrid[player2Pos.x, player2Pos.y + 1] != -1)
-                    {
-                        canPlayer2 = true;
-                        player2Pos.Set(player2Pos.x, player2Pos.y + 1);
-                    }
-                if (player1Pos.y - 1 >= 0)
-                    if (levelGrid[player1Pos.x, player1Pos.y - 1] != -1)
-                    {
-                        canPlayer1 = true;
-                        player1Pos.Set(player1Pos.x, player1Pos.y - 1);
-
-                    }
-                    break;
+                if (player1Pos.y - player2Pos.y == 1 && player1Pos.x == player2Pos.x) return true;
+                break;
             case 3:
-                if (player1Pos.x - 1 >= 0)
-                    if (levelGrid[player1Pos.x - 1, player1Pos.y] != -1)
-                    {
-                        canPlayer1 = true;
-                        player1Pos.Set(player1Pos.x - 1, player1Pos.y);
-                    }
-                if (player2Pos.x + 1 < levelGrid.GetLength(0))
-                    if (levelGrid[player2Pos.x + 1, player2Pos.y] != -1)
-                    {
-                        canPlayer2 = true;
-                        player2Pos.Set(player2Pos.x + 1, player2Pos.y);
-                    }
+                if (player1Pos.x - player2Pos.x == 1 && player1Pos.y == player2Pos.y) return true;
                 break;
         }
 
-        bool[] output = { canPlayer1, canPlayer2 };
-        Debug.Log(output[0] +" "+output[1]);
-        return output;
-    }
-
-    public bool[] VictoryCheck()
-    {
-        bool[] output = { levelGrid[player1Pos.x, player1Pos.y] == 2, levelGrid[player2Pos.x, player2Pos.y] == 4};
-        return output;
-    }
-
-    public bool GameOverCheck()
-    {
-        return player1Pos.x == player2Pos.x && player1Pos.y == player2Pos.y;
+        return false;
     }
 }
